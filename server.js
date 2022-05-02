@@ -18,4 +18,6 @@ server.use(
   })
 );
 
-server.listen(port);
+server.listen(port, () => {
+    console.log('port ran')
+});
