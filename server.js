@@ -1,5 +1,5 @@
 const data = require("./db.json");
-
+const { graphqlHTTP } = require("express-graphql");
 const jsonServer = require("json-server");
 const schema = require("./schema.js");
 const server = jsonServer.create();
