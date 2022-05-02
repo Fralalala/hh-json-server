@@ -17,28 +17,18 @@ const generate = async () => {
 
       let group = "red";
 
-      switch (hue) {
-        case value:
-          if (value <= 20) group = "red";
-          break;
-        case value:
-          if (value <= 45) group = "orange";
-          break;
-        case value:
-          if (value <= 63) group = "yellow";
-          break;
-        case value:
-          if (value <= 160) group = "green";
-          break;
-        case value:
-          if (value <= 256) group = "blue";
-          break;
-        case value:
-          if (value <= 335) group = "purple";
-          break;
-
-        default:
-          break;
+      if (hue <= 20) {
+        group = "red";
+      } else if (hue <= 45) {
+        group = "orange";
+      } else if (hue <= 63) {
+        group = "yellow";
+      } else if (hue <= 160) {
+        group = "green";
+      } else if (hue <= 256) {
+        group = "blue";
+      } else if (hue <= 335) {
+        group = "purple";
       }
 
       apiCalls.push(
