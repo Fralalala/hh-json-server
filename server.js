@@ -36,6 +36,27 @@ server.delete("/colors", async (req, res) => {
   }
 });
 
+server.post("/colors", async (req, res) => {
+  try {
+    const { colors } = req.body;
+
+    let url = "https://hh-json-server.herokuapp.com/colors";
+
+    const apiCalls = [];
+
+    colors.forEach((color) => {
+      apiCalls.push(axios.post(url, color));
+    });
+
+    await Promise.all(apiCalls);
+
+    res.send(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
+
 server.use(
   "/graphql",
   graphqlHTTP({
