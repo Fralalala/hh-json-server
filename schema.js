@@ -28,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CustomerType),
       resolve(parentValue, args) {
         return axios
-          .get("http://localhost:4000/api/colors")
+          .get("http://hh-json-server.herokuapp.com/api/colors")
           .then((res) => res.data);
       },
     },
@@ -49,7 +49,7 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return axios
-          .post("http://localhost:4000/api/colors", {
+          .post("http://hh-json-server.herokuapp.com/api/colors", {
             hue: args.hue,
             saturation: args.saturation,
             light: args.light,
