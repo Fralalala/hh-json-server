@@ -1,6 +1,7 @@
 const data = require("./db.json");
 
 const jsonServer = require("json-server");
+const schema = require("./schema.js");
 const server = jsonServer.create();
 const router = jsonServer.router(data);
 const middlewares = jsonServer.defaults();
