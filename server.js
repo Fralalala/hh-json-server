@@ -6,7 +6,10 @@ const server = jsonServer.create();
 const router = jsonServer.router(data);
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 3000;
+const cors = require("cors");
 
+server.use(cors());
+server.use(express.json());
 server.use(middlewares);
 server.use(router);
 
@@ -19,5 +22,5 @@ server.use(
 );
 
 server.listen(port, () => {
-    console.log('port ran')
+  console.log("port ran");
 });
