@@ -17,6 +17,7 @@ const CustomerType = new GraphQLObjectType({
     saturation: { type: GraphQLInt },
     light: { type: GraphQLInt },
     hex: { type: GraphQLString },
+    group: { type: GraphQLString },
   }),
 });
 
@@ -46,6 +47,7 @@ const mutation = new GraphQLObjectType({
         saturation: { type: new GraphQLNonNull(GraphQLInt) },
         light: { type: new GraphQLNonNull(GraphQLInt) },
         hex: { type: new GraphQLNonNull(GraphQLString) },
+        group: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parentValue, args) {
         return axios
@@ -54,6 +56,7 @@ const mutation = new GraphQLObjectType({
             saturation: args.saturation,
             light: args.light,
             hex: args.hex,
+            group: args.group,
           })
           .then((res) => res.data);
       },
