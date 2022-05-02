@@ -43,23 +43,23 @@ server.listen(port, async () => {
       let group = "red";
 
       switch (hue) {
-        case value:
-          if (value <= 20) group = "red";
+        case value <= 20:
+          group = "red";
           break;
-        case value:
-          if (value <= 45) group = "orange";
+        case value <= 45:
+          group = "orange";
           break;
-        case value:
-          if (value <= 63) group = "yellow";
+        case value <= 63:
+          group = "yellow";
           break;
-        case value:
-          if (value <= 160) group = "green";
+        case value <= 160:
+          group = "green";
           break;
-        case value:
-          if (value <= 256) group = "blue";
+        case value <= 256:
+          group = "blue";
           break;
-        case value:
-          if (value <= 335) group = "purple";
+        case value <= 335:
+          group = "purple";
           break;
 
         default:
