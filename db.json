@@ -1,0 +1,18 @@
+{
+  "colors": [
+    {
+      "id": 1,
+      "hue": 10,
+      "saturation": 50,
+      "light": 45,
+      "hex": "#ac4c39"
+    },
+    {
+      "hue": 130,
+      "saturation": 24,
+      "light": 50,
+      "hex": "#619e6b",
+      "id": 2
+    }
+  ]
+}
