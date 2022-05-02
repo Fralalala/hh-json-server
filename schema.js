@@ -28,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CustomerType),
       resolve(parentValue, args) {
         return axios
-          .get("http://hh-json-server.herokuapp.com/api/colors")
+          .get("http://hh-json-server.herokuapp.com/colors")
           .then((res) => res.data);
       },
     },
@@ -49,12 +49,23 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return axios
-          .post("http://hh-json-server.herokuapp.com/api/colors", {
+          .post("http://hh-json-server.herokuapp.com/colors", {
             hue: args.hue,
             saturation: args.saturation,
             light: args.light,
             hex: args.hex,
           })
+          .then((res) => res.data);
+      },
+    },
+    deleteColor: {
+      type: CustomerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .delete("http://hh-json-server.herokuapp.com/colors" + args.id)
           .then((res) => res.data);
       },
     },
