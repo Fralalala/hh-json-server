@@ -8,54 +8,13 @@ const router = jsonServer.router(data);
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 3000;
 const cors = require("cors");
-const { default: axios } = require("axios");
+const axios = require("axios");
+const hsl = require("hsl-to-hex");
 
 server.use(cors());
 server.use(express.json());
 server.use(middlewares);
 server.use(router);
-
-server.delete("/colors", async (req, res) => {
-  try {
-    const { ids } = req.body;
-
-    let url = "https://hh-json-server.herokuapp.com/colors";
-
-    const apiCalls = [];
-
-    ids.forEach((id) => {
-      apiCalls.push(axios.delete(url + id));
-    });
-
-    await Promise.all(apiCalls);
-
-    res.send(200);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error);
-  }
-});
-
-server.post("/colors", async (req, res) => {
-  try {
-    const { colors } = req.body;
-
-    let url = "https://hh-json-server.herokuapp.com/colors";
-
-    const apiCalls = [];
-
-    colors.forEach((color) => {
-      apiCalls.push(axios.post(url, color));
-    });
-
-    await Promise.all(apiCalls);
-
-    res.send(200);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error);
-  }
-});
 
 server.use(
   "/graphql",
@@ -65,6 +24,36 @@ server.use(
   })
 );
 
-server.listen(port, () => {
+const hslHelper = (value) => {
+  return hsl(value, 100, 50);
+};
+
+server.listen(port, async () => {
   console.log("port ran");
+
+  try {
+    const apiCalls = [];
+
+    // delete db
+    await axios.delete("http://localhost:3000/api/colors");
+
+    for (let index = 1; index <= 100; index++) {
+      const hue = Math.floor(index * 3.4);
+
+      apiCalls.push(
+        axios.post("https://hh-json-server.herokuapp.com/colors", {
+          hue,
+          saturation: 100,
+          light: 50,
+          hex: hslHelper(hue),
+        })
+      );
+    }
+
+    await Promise.all(apiCalls);
+
+    console.log("Success");
+  } catch (error) {
+    console.error("Failed to generate color data", error);
+  }
 });
