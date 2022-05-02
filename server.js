@@ -35,7 +35,7 @@ server.listen(port, async () => {
     const apiCalls = [];
 
     // delete db
-    await axios.delete("http://localhost:3000/api/colors");
+    await axios.delete("https://helpful-h.herokuapp.com/api/colors");
 
     for (let index = 1; index <= 100; index++) {
       const hue = Math.floor(index * 3.4);
